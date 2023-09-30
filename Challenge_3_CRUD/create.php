@@ -1,24 +1,29 @@
-<?php
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $item_name = $_POST['item_name'];
-    $item_desc = $_POST['item_desc'];
-    $item_img = $_POST['item_img'];
-    $item_price = $_POST['item_price'];
+ <?php
+ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+	 # Debugging - Loop through the $_POST array and print each key-value pair
+    foreach ($_POST as $key => $value) {
+        echo "$key: $value<br>";
+	}
+		
+     $item_name = $_POST['item_name'];
+     $item_desc = $_POST['item_desc'];
+     $item_img = $_POST['item_img'];
+     $item_price = $_POST['item_price'];
+ 
+     # Connect to the database.
+ 	  require ('connect_db.php'); 
 
-    # Connect to the database.
-	  require ('connect_db.php'); 
+   # Initialize an error array.
+   $errors = array();
 
-    # Initialize an error array.
-    $errors = array();
+   # Check for name .
+   if ( empty( $_POST[ 'item_name' ] ) )
+   { $errors[] = 'Enter product name.' ; }
+   else
+   { $n = mysqli_real_escape_string( $link, trim( $_POST[ 'item_name' ] ) ) ; }
 
-    # Check for name .
-    if ( empty( $_POST[ 'item_name' ] ) )
-    { $errors[] = 'Enter product name.' ; }
-    else
-    { $n = mysqli_real_escape_string( $link, trim( $_POST[ 'item_name' ] ) ) ; }
-
-    # Check for item description.
-    if (empty( $_POST[ 'item_desc' ] ) )
+   # Check for item description.
+   if (empty( $_POST[ 'item_desc' ] ) )
     { $errors[] = 'Enter product description.' ; }
     else
     { $d = mysqli_real_escape_string( $link, trim( $_POST[ 'item_desc' ] ) ) ; }

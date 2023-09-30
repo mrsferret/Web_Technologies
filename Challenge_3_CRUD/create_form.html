@@ -5,7 +5,8 @@
   </head>
   <body>
     <h1>Product Information Form</h1>
-    <form action="create.php" method="POST" enctype="multipart/form-data">
+    //<form action="create.php" method="POST" enctype="multipart/form-data">
+	<form action="create.php" method="POST">
       <label for="item_name">Item Name:</label>
       <input type="text" id="item_name" name="item_name" required /><br /><br />
 
@@ -18,10 +19,13 @@
       <input type="file" id="item_img" name="item_img" accept="image/*"
       //required />
       <br /><br /> -->
+	  
+	  <label for="item_img">Item Image:</label>
+      <input type="file" id="item_img" name="item_img" accept="image/*" required><br><br>
 
-      <label for="item_img">Item Image:</label>
-      <input type="text" id="item_img" name="item_img" required /><br /><br />
-
+      <!--<label for="item_img">Item Image:</label>
+      //<input type="text" id="item_img" name="item_img" required /><br /><br />
+		-->
       <label for="item_price">Item Price:</label>
       <input
         type="number"
