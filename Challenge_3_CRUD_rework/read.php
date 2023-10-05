@@ -33,7 +33,12 @@ $r = @mysqli_query ( $link, $sql ) ;
 				echo '<td>' . $row['item_id'] . '</td>';
                 echo '<td>' . $row['item_name'] . '</td>';
 				echo '<td>' . $row['item_desc'] . '</td>';
-				echo '<td>' . $row['item_img'] . '</td>';
+                // Display the image with the trimmed URL
+                //echo '<td>' . $row['item_img'] . '</td>';
+                echo 'item_img, ' . $row['item_img']; 
+                $imageUrl = trim($row['item_img']);
+                // Display the image with the trimmed URL
+                echo '<td><img src="' . $imageUrl . '" alt="' . $row['item_name'] . '" width="100"></td>';
                 echo '<td>' . $row['item_price'] . '</td>';
 				//echo '<td><a href="update.php?id=' . $row['item_id'] . '">Edit</a></td>';
 				echo '<td><a href="update.php?item_id=' . $row['item_id'] . '">Edit</a></td>';
