@@ -11,17 +11,16 @@ if (!$conn) {
     die('Database connection error: ' . mysqli_connect_error());
 }
 
+# Connect to the database.
+require ('connect_db.php'); 
+
 // Check if an ID is provided in the URL
 if (isset($_GET['item_id'])) {
     //$id = $_GET['id'];
     $item_id = $_GET['item_id']; // Assign the value to $item_id
-//if (isset($_GET['id'])) {
-//     $id = $_GET['id'];
-//    $item_id = $id; // Assign the value to $item_id    
-
      // Debugging: Output the value of 'id'
      //echo "ID from URL: " . $id;
-     echo "ID from URL: " . $item_id;
+     //echo "ID from URL: " . $item_id;
 
     # Debugging - Loop through the $_POST array and print each key-value pair
     foreach ($_POST as $key => $value) {
