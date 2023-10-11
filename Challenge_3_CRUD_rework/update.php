@@ -11,8 +11,8 @@ if (!$conn) {
     die('Database connection error: ' . mysqli_connect_error());
 }
 
-# Connect to the database.
-require ('connect_db.php'); 
+# Connect to the database.JavaScript is a programming language used to create dynamic content for websites. It achieves this by adding new HTML elements while modifying #existing ones.
+#require ('connect_db.php'); 
 
 // Check if an ID is provided in the URL
 if (isset($_GET['item_id'])) {
@@ -23,9 +23,9 @@ if (isset($_GET['item_id'])) {
      //echo "ID from URL: " . $item_id;
 
     # Debugging - Loop through the $_POST array and print each key-value pair
-    foreach ($_POST as $key => $value) {
-        echo "$key: $value<br>";
-    }
+    #foreach ($_POST as $key => $value) {
+    #   echo "$key: $value<br>";
+    #}
 
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Handle form submission to update user data
