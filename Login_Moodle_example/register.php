@@ -52,19 +52,19 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
 
   # On success register user inserting into 'users' database table.
   if ( empty( $errors ) ) 
-  {
+    {
     $q = "INSERT INTO users (first_name, last_name, email, pass, reg_date) 
-	VALUES ('$fn', '$ln', '$e', SHA2('$p',256), NOW() )";
+	  VALUES ('$fn', '$ln', '$e', SHA2('$p',256), NOW() )";
     $r = @mysqli_query ( $link, $q ) ;
     if ($r)
     { echo '<div class="container">
-<div class="alert alert-secondary" role="alert">
-  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-  <span aria-hidden="true">×</span>
-  </button>
-    <h4 class="alert-heading"Registered!</h4>
-    <p>You are now registered.</p>
-    <a class="alert-link" href="login.php">Login</a>'; }
+      <div class="alert alert-secondary" role="alert">
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">×</span>
+      </button>
+      <h4 class="alert-heading"Registered!</h4>
+      <p>You are now registered.</p>
+      <a class="alert-link" href="login.php">Login</a>'; }
   
     # Close database connection.
     mysqli_close($link); 
