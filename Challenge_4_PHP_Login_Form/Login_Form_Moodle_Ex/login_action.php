@@ -46,7 +46,16 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
     load ( 'zhome.php' ) ;
   }
   # Or on failure set errors.
-  else { $errors = $data; } 
+  else { $errors = $data;
+    # include ( 'include/head.php' ) ;
+    # Display any error messages if present.
+    if ( isset( $errors ) && !empty( $errors ) )
+      {echo 'error set';
+      echo '<p id="err_msg">Oops! There was a problem:<br>' ;
+      foreach ( $errors as $msg ) { echo " - $msg<br>" ; }
+      echo 'Please try again or <a href="register.php">Register</a></p>' ;
+      }
+  } 
 
   # Close database connection.
   echo 'closing db connection' . '<br>'; //debugging

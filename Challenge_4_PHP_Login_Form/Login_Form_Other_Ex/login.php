@@ -1,5 +1,6 @@
 <?php
 // Start a PHP session
+echo "login.php";
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
