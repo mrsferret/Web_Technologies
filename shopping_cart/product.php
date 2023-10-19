@@ -1,4 +1,5 @@
 <?php
+// product.php
 // Check to make sure the id parameter is specified in the URL
 if (isset($_GET['id'])) {
     // Prepare statement and execute, prevents SQL injection
@@ -23,9 +24,9 @@ if (isset($_GET['id'])) {
     <div>
         <h1 class="name"><?=$product['name']?></h1>
         <span class="price">
-            &dollar;<?=$product['price']?>
+            &pound;<?=$product['price']?>
             <?php if ($product['rrp'] > 0): ?>
-            <span class="rrp">&dollar;<?=$product['rrp']?></span>
+            <span class="rrp">&pound;<?=$product['rrp']?></span>
             <?php endif; ?>
         </span>
         <form action="index.php?page=cart" method="post">

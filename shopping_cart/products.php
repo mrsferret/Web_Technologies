@@ -1,4 +1,5 @@
 <?php
+// products.php
 // The amounts of products to show on each page
 $num_products_on_each_page = 4;
 // The current page - in the URL, will appear as index.php?page=products&p=1, index.php?page=products&p=2, etc...
@@ -25,9 +26,9 @@ $total_products = $pdo->query('SELECT * FROM products')->rowCount();
             <img src="imgs/<?=$product['img']?>" width="200" height="200" alt="<?=$product['name']?>">
             <span class="name"><?=$product['name']?></span>
             <span class="price">
-                &dollar;<?=$product['price']?>
+                &pound;<?=$product['price']?>
                 <?php if ($product['rrp'] > 0): ?>
-                <span class="rrp">&dollar;<?=$product['rrp']?></span>
+                <span class="rrp">&pound;<?=$product['rrp']?></span>
                 <?php endif; ?>
             </span>
         </a>

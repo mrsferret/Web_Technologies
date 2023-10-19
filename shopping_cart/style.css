@@ -96,7 +96,7 @@ header .link-icons a span {
 main .featured {
   display: flex;
   flex-direction: column;
-  background-image: url(imgs/featured-image.jpg);
+  background-image: url(imgs/Lovely_AI_flower_pattern.png);
   background-repeat: no-repeat;
   background-size: cover;
   height: 500px;
