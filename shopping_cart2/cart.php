@@ -59,25 +59,43 @@ include 'includes\header.php';
                     // Calculate the cart total
                     $cartTotal = 0;
 
+                    // Display the contents of the session cart array
+                    echo '<pre>';
+                    print_r($_SESSION['cart']);
+                    echo '</pre>';
+
                     foreach ($_SESSION['cart'] as $cartItem) {
                         $productId = $cartItem['id'];
+                        // Display the product ID for each cart item
+                        echo 'Product ID2: ' . $productId . '<br>';
 
-                        // Query to retrieve product details by ID
-                        $sql = "SELECT * FROM products WHERE id = $productId";
-                        $result = mysqli_query($link, $sql);
+                    }
 
-                        if ($result && mysqli_num_rows($result) > 0) {
-                            $product = mysqli_fetch_assoc($result);
-                            $productPrice = $product['price'];
-                            $productTotal = $productPrice * $cartItem['quantity'];
-                            $cartTotal += $productTotal;
-
-                            echo '<tr>';
-                            echo '<td>' . $product['name'] . '</td>';
-                            echo '<td>&pound;' . $productPrice . '</td>';
-                            echo '<td>' . $cartItem['quantity'] . '</td>';
-                            echo '<td>&pound;' . $productTotal . '</td>';
-                            echo '</tr>';
+                    foreach ($_SESSION['cart'] as $cartItem) {
+                        // Check if $cartItem is an array before accessing 'id'
+                        if (is_array($cartItem)) {
+                            $productId = $cartItem['id'];
+                            
+                            // Display the product ID for each cart item
+                            echo 'Product ID2: ' . $productId . '<br>';
+                        
+                            // Query to retrieve product details by ID
+                            $sql = "SELECT * FROM products WHERE id = $productId";
+                            $result = mysqli_query($link, $sql);
+                        
+                            if ($result && mysqli_num_rows($result) > 0) {
+                                $product = mysqli_fetch_assoc($result);
+                                $productPrice = $product['price'];
+                                $productTotal = $productPrice * $cartItem['quantity'];
+                                $cartTotal += $productTotal;
+                        
+                                echo '<tr>';
+                                echo '<td>' . $product['name'] . '</td>';
+                                echo '<td>&pound;' . $productPrice . '</td>';
+                                echo '<td>' . $cartItem['quantity'] . '</td>';
+                                echo '<td>&pound;' . $productTotal . '</td>';
+                                echo '</tr>';
+                            }
                         }
                     }
                     ?>
