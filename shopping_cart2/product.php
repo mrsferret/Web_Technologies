@@ -35,15 +35,23 @@ if (isset($_GET['id'])) {
     $product = null;
 }
 
-// Handle adding the product to the cart after button clicked
+// Handle adding the product to the cart after the button is clicked
 if ($product && isset($_POST['add_to_cart'])) {
     $cartItem = [
         'id' => $product['id'],
-        
+        'quantity' => isset($_POST['quantity']) ? (int)$_POST['quantity'] : 1,
     ];
-    $_SESSION['cart'][] = $cartItem;
+
+    if (isset($_SESSION['cart'][$product['id']])) {
+        // Product already exists in the cart; update the quantity
+        $_SESSION['cart'][$product['id']]['quantity'] += $cartItem['quantity'];
+    } else {
+        // Product doesn't exist in the cart; add it
+        $_SESSION['cart'][$product['id']] = $cartItem;
+    }
+
     // Optionally, you can provide a message to confirm the product has been added to the cart
-    $cart_message = 'Product added to the cart';
+    $cart_message = 'Product(s) added to the cart';
 }
 ?>
 

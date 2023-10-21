@@ -59,25 +59,25 @@ include 'includes\header.php';
                     // Calculate the cart total
                     $cartTotal = 0;
 
-                    // Display the contents of the session cart array
-                    echo '<pre>';
-                    print_r($_SESSION['cart']);
-                    echo '</pre>';
+                    // For debugging - Display the contents of the session cart array
+                    #echo '<pre>';
+                    #print_r($_SESSION['cart']);
+                    #echo '</pre>';
 
-                    foreach ($_SESSION['cart'] as $cartItem) {
-                        $productId = $cartItem['id'];
-                        // Display the product ID for each cart item
-                        echo 'Product ID2: ' . $productId . '<br>';
-
-                    }
+                    # for debugging
+                    #foreach ($_SESSION['cart'] as $cartItem) {
+                    #    $productId = $cartItem['id'];
+                    #    // Display the product ID for each cart item
+                    #    echo 'Product ID2: ' . $productId . '<br>';
+                    # }
 
                     foreach ($_SESSION['cart'] as $cartItem) {
                         // Check if $cartItem is an array before accessing 'id'
                         if (is_array($cartItem)) {
                             $productId = $cartItem['id'];
                             
-                            // Display the product ID for each cart item
-                            echo 'Product ID2: ' . $productId . '<br>';
+                            // Display the product ID for each cart item - for debugging
+                            //echo 'Product ID2: ' . $productId . '<br>';
                         
                             // Query to retrieve product details by ID
                             $sql = "SELECT * FROM products WHERE id = $productId";
