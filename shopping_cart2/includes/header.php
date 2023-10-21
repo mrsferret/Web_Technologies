@@ -1,4 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" >Grenetote Shopping Cart System</a>
     <a class="navbar-brand" href="index.php">Home</a>
     <a class="navbar-brand" href="products.php">Products</a>
     <a class="navbar-brand" href="cart.php">

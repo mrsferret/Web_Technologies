@@ -53,6 +53,7 @@ include 'includes\header.php';
 ?>
 
 <div class="container">
+    <h1 class="py-4 text-center">Products</h1>
     <div class="row">
         <?php foreach ($products as $product) : ?>
             <div class="col-md-<?php echo 12 / $columns; ?>">
@@ -61,7 +62,6 @@ include 'includes\header.php';
                     <div class="card-body">
                         <h5 class="card-title"><?= $product['name'] ?></h5>
                         <p class="card-text">Price: &pound;<?= $product['price'] ?></p>
-                        <p class="card-text"><?= $product['desc'] ?></p>
                         <a href="product.php?id=<?= $product['id'] ?>" class="btn btn-primary">View Details</a>
                     </div>
                 </div>
@@ -83,7 +83,7 @@ if ($result) {
 $totalPages = ceil($totalProducts / $productsPerPage);
 
 echo '<div class="container">';
-echo '<div class="row justify-content-center">';
+echo '<div class="row justify-content-end mt-3">';
 if ($currentPage > 1) {
     echo '<a href="products.php?page=' . ($currentPage - 1) . '" class="btn btn-primary">Previous</a>';
 }
