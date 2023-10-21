@@ -45,67 +45,61 @@ include 'includes\header.php';
             <p><?php echo $cartMessage; ?></p>
         </div>
         <div class="col-12">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Product</th>
-                        <th>Price</th>
-                        <th>Quantity</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    // Calculate the cart total
-                    $cartTotal = 0;
+            <form method="POST" action="update_cart.php">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        // Calculate the cart total
+                        $cartTotal = 0;
 
-                    // For debugging - Display the contents of the session cart array
-                    #echo '<pre>';
-                    #print_r($_SESSION['cart']);
-                    #echo '</pre>';
+                        foreach ($_SESSION['cart'] as $productId => $cartItem) {
+                            // Check if $cartItem is an array before accessing 'id'
+                            if (is_array($cartItem)) {
+                                // Query to retrieve product details by ID
+                                $sql = "SELECT * FROM products WHERE id = $productId";
+                                $result = mysqli_query($link, $sql);
 
-                    # for debugging
-                    #foreach ($_SESSION['cart'] as $cartItem) {
-                    #    $productId = $cartItem['id'];
-                    #    // Display the product ID for each cart item
-                    #    echo 'Product ID2: ' . $productId . '<br>';
-                    # }
+                                if ($result && mysqli_num_rows($result) > 0) {
+                                    $product = mysqli_fetch_assoc($result);
+                                    $productPrice = $product['price'];
+                                    $productTotal = $productPrice * $cartItem['quantity'];
+                                    $cartTotal += $productTotal;
 
-                    foreach ($_SESSION['cart'] as $cartItem) {
-                        // Check if $cartItem is an array before accessing 'id'
-                        if (is_array($cartItem)) {
-                            $productId = $cartItem['id'];
-                            
-                            // Display the product ID for each cart item - for debugging
-                            //echo 'Product ID2: ' . $productId . '<br>';
-                        
-                            // Query to retrieve product details by ID
-                            $sql = "SELECT * FROM products WHERE id = $productId";
-                            $result = mysqli_query($link, $sql);
-                        
-                            if ($result && mysqli_num_rows($result) > 0) {
-                                $product = mysqli_fetch_assoc($result);
-                                $productPrice = $product['price'];
-                                $productTotal = $productPrice * $cartItem['quantity'];
-                                $cartTotal += $productTotal;
-                        
-                                echo '<tr>';
-                                echo '<td>' . $product['name'] . '</td>';
-                                echo '<td>&pound;' . $productPrice . '</td>';
-                                echo '<td>' . $cartItem['quantity'] . '</td>';
-                                echo '<td>&pound;' . $productTotal . '</td>';
-                                echo '</tr>';
+                                    echo '<tr>';
+                                    echo '<td>' . $product['name'] . '</td>';
+                                    echo '<td>&pound;' . $productPrice . '</td>';
+                                    echo '<td><input type="number" name="qty[' . $productId . ']" value="' . $cartItem['quantity'] . '"></td>';
+                                    echo '<td>&pound;' . $productTotal . '</td>';
+                                    echo '</tr>';
+                                }
                             }
                         }
-                    }
-                    ?>
-                </tbody>
-            </table>
-        </div>
-    </div>
-    <div class="row justify-content-end">
-        <div class="col-6">
-            <p>Total: &pound;<?php echo $cartTotal; ?></p>
+                        ?>
+                    </tbody>
+                </table>
+                <div class="row justify-content-end">
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-primary" name="update_cart">Update Basket</button>
+                    </div>
+                    <div class="col-3">
+                        <p>Total: &pound;<?php echo $cartTotal; ?></p>
+                    </div>
+                </div>
+                <div class="row justify-content-end">
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-success" name="checkout">Checkout Now</button>
+                    </div>
+                </div>
+                
+            </form>
         </div>
     </div>
 </div>
