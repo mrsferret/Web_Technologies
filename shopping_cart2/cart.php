@@ -95,7 +95,8 @@ include 'includes\header.php';
                 </div>
                 <div class="row justify-content-end">
                     <div class="col-3">
-                        <button type="submit" class="btn btn-success" name="checkout">Checkout Now</button>
+                        <!--<button type="submit" class="btn btn-success" name="checkout">Checkout Now</button> -->
+                        <td><a href="checkout.php?total=<?php echo $cartTotal; ?>" class="btn btn-warning btn-block">Checkout Now</a></td>
                     </div>
                 </div>
                 

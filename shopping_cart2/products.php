@@ -85,10 +85,10 @@ $totalPages = ceil($totalProducts / $productsPerPage);
 echo '<div class="container">';
 echo '<div class="row justify-content-end mt-3">';
 if ($currentPage > 1) {
-    echo '<a href="products.php?page=' . ($currentPage - 1) . '" class="btn btn-primary">Previous</a>';
+    echo '<a href="products.php?page=' . ($currentPage - 1) . '" class="btn btn-primary" p-2>Previous</a>';
 }
 if ($currentPage < $totalPages) {
-    echo '<a href="products.php?page=' . ($currentPage + 1) . '" class="btn btn-primary">Next</a>';
+    echo '<a href="products.php?page=' . ($currentPage + 1) . '" class="btn btn-primary p-2">Next</a>';
 }
 echo '</div>';
 echo '</div>';

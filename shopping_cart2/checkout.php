@@ -1,5 +1,24 @@
 <?php # DISPLAY CHECKOUT PAGE.
 
+// Start or resume the session
+session_start();
+
+// Display the contents of the session cart array
+echo '<pre>';
+print_r($_SESSION['cart']);
+echo '</pre>';
+
+echo "User ID: " . $_SESSION['user_id'];
+
+// Retrieve the total from the query parameter
+if (isset($_GET['total'])) {
+  $cartTotal = floatval($_GET['total']);
+  echo "$cartTotal";
+  // Now you can use $cartTotal in your checkout.php file
+} else {
+  // Handle the case where total is not set
+  echo "Total not provided.";
+}
 # Check for passed total and cart.
 if ( isset( $_GET['total'] ) && ( $_GET['total'] > 0 ) && (!empty($_SESSION['cart']) ) )
 {
