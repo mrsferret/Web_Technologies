@@ -37,7 +37,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
   }
   # On success set session data and display logged in page.
   if ( $check )  
-  {
+  { echo "ABout tho start session <br>";
     # Access session.
     session_start();
     $_SESSION[ 'user_id' ] = $data[ 'user_id' ] ;
@@ -64,6 +64,6 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
 
 # Continue to display login page on failure.
 include ( 'login.php' ) ;
-//include ( 'login.html' ) ;
+#include ( 'login.html' ) ;
 
 ?>

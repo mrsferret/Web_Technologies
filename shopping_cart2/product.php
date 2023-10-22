@@ -86,7 +86,15 @@ include 'includes\header.php';
                             <div class="input-group">
                                 <input type="number" class="form-control" name="quantity" value="1" min="1">
                                 <div class="input-group-append">
-                                    <button type="submit" class="btn btn-primary" name="add_to_cart">Add to Cart</button>
+                                <?php
+                                    // Check if user is logged in (user_id is set in session). If not disable Add to Cart button
+                                    if (isset($_SESSION['user_id'])) {
+                                        echo '<button type="submit" class="btn btn-primary" name="add_to_cart">Add to Cart</button>';
+                                    } else {
+                                        echo '<button type="button" class="btn btn-primary" disabled>Add to Cart</button>';
+                                    }
+                                ?>   
+                                <!--<button type="submit" class="btn btn-primary" name="add_to_cart">Add to Cart</button> -->
                                 </div>
                             </div>
                         </form>

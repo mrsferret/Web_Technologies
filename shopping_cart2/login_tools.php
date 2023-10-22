@@ -2,7 +2,6 @@
 //debugging
 echo '<br>' . 'login_tools.php' . '<br>';
 
-
 # Function to load specified or default URL.
 //function load( $page = 'login.php' )
 function load( $page = 'login.html' )

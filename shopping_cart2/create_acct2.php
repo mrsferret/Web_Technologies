@@ -15,12 +15,11 @@
   </head>
 
   <body>
-    <?php
+  <?php
       // Include the header
       include 'includes\header.php';
     ?>
-    
-    <div class="container p-4 my-5">
+    <div class="container p-3 my-3 ">
       <h1>Create Account</h1>
     </div>
     <div class="container mt-5">
@@ -33,6 +32,7 @@
               class="form-control"
               id="first_name"
               name="first_name"
+              required
               placeholder="* First Name"
             />
           </div>
@@ -43,6 +43,7 @@
               class="form-control"
               id="last_name"
               name="last_name"
+              required
               placeholder="* Last Name"
             />
           </div>
@@ -89,49 +90,8 @@
             />
           </div>
         </div>
-        <button type="submit" class="btn btn-primary mt-3 mb-3">Submit</button>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
       </form>
-      <!-- Bootstrap Modal for Alert -->
-      <div class="modal" id="alertModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Alert</h5>
-            </div>
-            <div class="modal-body" id="alertMessage">Alert Message</div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-dismiss="modal"
-              >
-                OK
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <!-- Bootstrap Modal for information -->
-      <div class="modal" id="infoModal" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Information</h5>
-            </div>
-            <div class="modal-body" id="infoMessage">Information Message</div>
-            <div class="modal-footer">
-              <button
-                type="button"
-                class="btn btn-primary"
-                data-dismiss="modal"
-              >
-                OK
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="error_messages" class="error-messages"></div>
     </div>
 
     <?php
@@ -154,49 +114,3 @@
     <!-- <script src="calculator.js"></script> -->
   </body>
 </html>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const formElement = document.querySelector("form");
-    const infoModal = new bootstrap.Modal(document.getElementById("infoModal"));
-    const infoMessage = document.getElementById("infoMessage");
-    const submitButton = document.querySelector("button[type=submit");
-
-    formElement.addEventListener("submit", async (event) => {
-      event.preventDefault();
-      const formData = new FormData(formElement);
-      const response = await fetch(formElement.action, {
-        method: formElement.method,
-        body: formData,
-      });
-
-      if (response.ok) {
-        const responseText = await response.text();
-        if (responseText.includes("Error:")) {
-          alertMessage.textContent = responseText;
-          alertModal.show();
-        } else {
-          // Display informational message in the infoModal
-          infoMessage.textContent = responseText;
-          infoModal.show();
-
-          // Clear the form fields
-          formElement.reset();
-          submitButton.disabled = false;
-        }
-      } else {
-        alertMessage.textContent =
-          "An error occurred while submitting the form.";
-        alertModal.show();
-      }
-    });
-
-    // Add an event listener to the "OK" button inside the infoModal
-    const infoModalOkButton = document.querySelector(
-      "#infoModal button[data-dismiss='modal']"
-    );
-    infoModalOkButton.addEventListener("click", () => {
-      infoModal.hide(); // Close the infoModal
-    });
-  });
-</script>

@@ -1,3 +1,23 @@
+<?php
+// start or resume session
+session_start();
+// For debugging - Display the contents of the session
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
+if(array_key_exists('user_id',$_SESSION) && !empty($_SESSION['user_id'])) {
+    // we must have come here after successful login (login.php)
+    // so we want to keep this session
+    echo 'Set and not empty, and no undefined index error!';
+}else {
+    # we have not come here from successful login so we don't
+    # want the SESSION to start yet until they have logged in successfully
+    #header("Location: destroy_session.php");
+    # Get connection, load, and validate functions.
+    require ( 'destroy_session.php' ) ;
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

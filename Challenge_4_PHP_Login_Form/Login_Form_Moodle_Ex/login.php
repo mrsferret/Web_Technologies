@@ -14,6 +14,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   </head>
   <body>
+    <?php
+    include('includes/header.php'); 
+    ?>
     <form action="login_action.php" method="post">
         <div class="form-group">
           <label for="inputemail">Email</label>
@@ -26,6 +29,10 @@
         </div>
           <input type="submit" class="btn btn-dark btn-lg btn-block" value="Login" ></p>
       </form>
+
+    <?php
+    include('includes/footer.php'); 
+    ?>
 
   </body>
 </html>

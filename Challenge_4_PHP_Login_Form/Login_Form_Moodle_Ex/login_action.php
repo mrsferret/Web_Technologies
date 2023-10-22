@@ -38,11 +38,17 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
   # On success set session data and display logged in page.
   if ( $check )  
   {
+    // For debugging - Display the contents of the session
+    echo "about to start session";    
+    
     # Access session.
     session_start();
     $_SESSION[ 'user_id' ] = $data[ 'user_id' ] ;
     $_SESSION[ 'first_name' ] = $data[ 'first_name' ] ;
     $_SESSION[ 'last_name' ] = $data[ 'last_name' ] ;
+    echo '<pre>';
+    print_r($_SESSION);
+    echo '</pre>';
     load ( 'zhome.php' ) ;
   }
   # Or on failure set errors.
@@ -63,7 +69,7 @@ if ( $_SERVER[ 'REQUEST_METHOD' ] == 'POST' )
 }
 
 # Continue to display login page on failure.
-//include ( 'login.php' ) ;
-include ( 'login.html' ) ;
+include ( 'login.php' ) ;
+//include ( 'login.html' ) ;
 
 ?>

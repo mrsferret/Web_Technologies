@@ -15,8 +15,19 @@ if (empty($_SESSION['cart'])) {
     $cartMessage = 'Your cart is empty.';
 } else {
     $cartMessage = '';
+    // debugging
+    // Display the contents of the session cart array
+    echo '<pre>';
+    print_r($_SESSION['cart']);
+    echo '</pre>';
 }
-
+#-------------------------------
+if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])){
+    // debugging
+    echo "User ID: " . $_SESSION['user_id'];
+    
+  }
+  
 // Include the header
 include 'includes\header.php';
 ?>
@@ -39,7 +50,7 @@ include 'includes\header.php';
 <body>
 
 <div class="container">
-    <h1 class="text-center">Shopping Cart</h1>
+    <h1 class="text-center py-4 ">Shopping Cart</h1>
     <div class="row">
         <div class="col-12">
             <p><?php echo $cartMessage; ?></p>
@@ -93,11 +104,17 @@ include 'includes\header.php';
                         <p>Total: &pound;<?php echo $cartTotal; ?></p>
                     </div>
                 </div>
-                <div class="row justify-content-end">
-                    <div class="col-3">
-                        <!--<button type="submit" class="btn btn-success" name="checkout">Checkout Now</button> -->
-                        <td><a href="checkout.php?total=<?php echo $cartTotal; ?>" class="btn btn-warning btn-block">Checkout Now</a></td>
-                    </div>
+                <div class="col-3">
+                    <?php
+                    // Check if cart is empty 
+                    if (isset($_SESSION['cart']) && !empty($_SESSION['cart']) ) {
+                        // Cart not empty, enable the Checkout Now button
+                        echo '<a href="checkout.php?total=' . $cartTotal . '" class="btn btn-warning btn-block">Checkout Now</a>';
+                    } else {
+                        // User is not logged in, disable the Checkout Now button
+                        echo '<button class="btn btn-warning btn-block" disabled>Checkout Now</button>';
+                    }
+                ?>
                 </div>
                 
             </form>

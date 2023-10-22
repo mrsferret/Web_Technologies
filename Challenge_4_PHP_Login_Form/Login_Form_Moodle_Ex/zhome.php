@@ -1,4 +1,11 @@
 <?php
+// session start/resume
+session_start();
+// For debugging - Display the contents of the session
+echo '<pre>';
+print_r($_SESSION);
+echo '</pre>';
+
 echo '
 <div class="container text-center">
         <h1 class="coming-soon-text">Coming Soon</h1>

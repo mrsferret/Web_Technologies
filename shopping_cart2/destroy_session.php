@@ -22,5 +22,5 @@ session_destroy();
 echo 'Session destroyed successfully';
 
 // Redirect to a desired page after destroying the session, if needed
-// header("Location: index.php");
+//header("Location: index.php");
 ?>
