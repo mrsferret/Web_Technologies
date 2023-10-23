@@ -34,11 +34,51 @@ if(array_key_exists('user_id',$_SESSION) && !empty($_SESSION['user_id'])) {
       integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
       crossorigin="anonymous"
     />
-
-    <title>Hello, world!</title>
+    <title>My SHopping Cart App</title>
   </head>
 <body>
     <?php include('includes/header.php'); ?>
+
+    <!-- Hero -->
+    <!--
+    <div class="p-5 text-center bg-image rounded-3" style="
+        background-image: url('/images/Lovely_AI_flower_pattern.png');
+        height: 400px;">
+        <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+            <div class="d-flex justify-content-center align-items-center h-100">
+                <div class="text-white">
+                    <h1 class="mb-3">Heading</h1>
+                    <h4 class="mb-3">Subheading</h4>
+                    
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Hero -->
+    <!-- Hero -->
+    <div class="bg-image d-flex justify-content-center align-items-center" style="background-image: url('images/Lovely_AI_flower_pattern.png'); background-size: cover; background-position: center center; height: 600px;">
+        <div class="p-5 text-white justify-content-center align-items-center text-center ">
+            <h1>Dogs with Hats</h2>
+            <h2>Essential Gadgets for the Discerning Canine</h4>
+        </div>
+    </div>
+<!-- Hero -->
+    <!-- Hero -->
+    <!-- <div class="bg" style="background-image: url('images/Lovely_AI_flower_pattern.png');">
+        <div class="p-5 text-white rounded-3">
+            <h2>Hero Section</h2>
+            <h4>It's easy to set a background image with Torus Kit</h4>
+        </div>
+    </div> -->
+    <!-- Hero -->
+    <!-- Hero -->
+    <!-- <div class="has-bg-img p-5 rounded-3">
+        <h2>Hero Section</h2>
+        <h4>It's easy to set background image with Torus Kit</h4>
+        <img class="bg-img" src="images/Lovely_AI_flower_pattern.png" alt="">
+    </div> -->
+
+    <!-- Hero -->
 
     <div class="container mt-5">
         <h2>Recent Products</h2>
@@ -60,7 +100,7 @@ if(array_key_exists('user_id',$_SESSION) && !empty($_SESSION['user_id'])) {
                     echo '<img src="images/' . $row['img'] . '" class="card-img-top" alt="' . $row['name'] . '">';
                     echo '<div class="card-body">';
                     echo '<h5 class="card-title">' . $row['name'] . '</h5>';
-                    echo '<p class="card-text">$' . $row['price'] . '</p>';
+                    echo '<p class="card-text">£' . $row['price'] . '</p>';
                     echo '<a href="product.php?id=' . $row['id'] . '" class="btn btn-primary">View Product</a>';
                     echo '</div>';
                     echo '</div>';
