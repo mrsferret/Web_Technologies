@@ -31,7 +31,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])){
 
 <?php
 if (isset($_POST['update_cart'])){
-    echo "update_cart<br>";
+    /*echo "update_cart<br>";
     echo '<pre>';
     print_r($_SESSION['cart']);
     echo '</pre>';
@@ -47,39 +47,39 @@ if (isset($_POST['update_cart'])){
     echo "$_POST values<br>";
     echo '<pre>';
     print_r($_POST);
-    echo '</pre>';
+    echo '</pre>'; */
 
-    if (isset($_SESSION['cart'])){
+    if (isset($_SESSION['cart'])) {
         echo "SESSION(cart) is set <br>";
+        
         // Loop through the post data to update the quantities for every product in the cart
         foreach ($_POST as $key => $value) {
             echo "in foreach loop<br>";
-            echo "Key: $key, Value: $value<br>";
-            //echo "$value: " . $value . "<br>";
-            if (strpos($key, 'qty') !== false) {
-                echo "if (strpos($key, 'qty') !== false)<br>";
-                $id = str_replace('qty', '', $key);
-                echo "key: " . $key . "<br>";
-                echo "ID: " . $id . "<br>";
-                $quantity = (int) $value;
-                echo "quantity: " . $quantity . "<br>";
-                // Validate the quantity and ensure it's not negative
-                if ($quantity >= 0) {
-                    if ($quantity === 0) {
-                        // If the quantity is set to 0, remove the product from the cart
-                        unset($_SESSION['cart'][$id]);
-                    } else {
-                        // Update the quantity for the product
-                        $_SESSION['cart'][$id] = $quantity;
+            echo "Key: $key, Value: ";
+            
+            if (is_array($value)) {
+                echo "Array<br>";
+                // You're dealing with an array here
+                foreach ($value as $id => $quantity) {
+                    echo "ID: " . $id . "<br>";
+                    echo "Quantity: " . $quantity . "<br>";
+                    // Validate the quantity and ensure it's not negative
+                    $quantity = (int) $quantity;
+                    if ($quantity >= 0) {
+                        if ($quantity === 0) {
+                            // If the quantity is set to 0, remove the product from the cart
+                            unset($_SESSION['cart'][$id]);
+                        } else {
+                            // Update the quantity for the product
+                            $_SESSION['cart'][$id]['quantity'] = $quantity;
+                        }
                     }
                 }
-            
             } else {
-                echo "else section <br>";
+                echo $value . "<br>";
             }
         }
     }
-
 }
 // handle the form submission and update the cart
 /*if (isset($_POST['update_cart']) && isset($_SESSION['cart'])) {
