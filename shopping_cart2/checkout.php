@@ -3,21 +3,19 @@
 // Start or resume the session
 session_start();
 
-if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])){
+/*if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])){
   // debugging
   echo "User ID: " . $_SESSION['user_id'];
   
-}
+} */
 
-if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
+/*if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
   // debugging
   // Display the contents of the session cart array
   echo '<pre>';
   print_r($_SESSION['cart']);
   echo '</pre>';
-}
-
-
+} */
 
 // Retrieve the total from the query parameter
 if (isset($_GET['total'])) {
@@ -41,18 +39,33 @@ if ( isset( $_GET['total'] ) && ( $_GET['total'] > 0 ) && (!empty($_SESSION['car
   # Retrieve current order number.
   $order_id = mysqli_insert_id($link) ;
 
-  #echo "Order ID: " . $order_id;
+  #echo "Order ID: " . $order_id . "<br>";
   
   # Retrieve cart items from 'products' database table.
   $q = "SELECT * FROM products WHERE id IN (";
-  foreach ($_SESSION['cart'] as $id => $value) { $q .= $id . ','; }
-  $q = substr( $q, 0, -1 ) . ') ORDER BY id ASC';
-  $r = mysqli_query ($link, $q);
-  #echo "$q: " . $q;
-  #echo '<pre>';
-  #print_r($r);
-  #echo '</pre>';
+  #echo "q(1): " . $q . "<br>";
 
+  $firstIteration = true;  // Initialize a flag for the first iteration
+  foreach ($_SESSION['cart'] as $id => $value) {
+    // Check if $id is valid
+    if (!empty($id) && is_numeric($id)) {
+        #echo "Id: " . $id . "<br>";
+        if ($firstIteration) {
+            $q .= $id;
+            echo "q(2): " . $q . "<br>";
+            $firstIteration = false;
+        } else {
+            $q .= ',' . $id;
+        }
+        #echo "q(3): " . $q . "<br>";
+    }
+  } 
+  // Add the closing bracket
+  $q .= ")";
+  // Now $q should have the closing bracket
+  echo "q(4): " . $q . "<br>";
+  $r = mysqli_query ($link, $q);
+  
   # Store order contents in 'order_content' database table.
   while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC))
   { 

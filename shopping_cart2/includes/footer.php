@@ -6,7 +6,7 @@
   
   <!-- Copyright -->
   <div class="text-center p-2">
-    © 2023 Copyright:
+    © <?php echo date('Y'); ?> Copyright:
     <a class="text-light" href="#">Piscator Enterprises</a>
   </div>
   <!-- Copyright -->
