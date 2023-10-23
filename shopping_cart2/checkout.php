@@ -22,7 +22,7 @@ if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
 // Retrieve the total from the query parameter
 if (isset($_GET['total'])) {
   $cartTotal = floatval($_GET['total']);
-  echo "$cartTotal";
+  #echo "$cartTotal";
   // Now you can use $cartTotal in your checkout.php file
 } else {
   // Handle the case where total is not set
@@ -40,19 +40,34 @@ if ( isset( $_GET['total'] ) && ( $_GET['total'] > 0 ) && (!empty($_SESSION['car
   
   # Retrieve current order number.
   $order_id = mysqli_insert_id($link) ;
+
+  #echo "Order ID: " . $order_id;
   
   # Retrieve cart items from 'products' database table.
   $q = "SELECT * FROM products WHERE id IN (";
   foreach ($_SESSION['cart'] as $id => $value) { $q .= $id . ','; }
   $q = substr( $q, 0, -1 ) . ') ORDER BY id ASC';
   $r = mysqli_query ($link, $q);
+  #echo "$q: " . $q;
+  #echo '<pre>';
+  #print_r($r);
+  #echo '</pre>';
 
-  # Store order contents in 'order_contents' database table.
+  # Store order contents in 'order_content' database table.
   while ($row = mysqli_fetch_array ($r, MYSQLI_ASSOC))
-  {
-    $query = "INSERT INTO order_content ( order_id, item_id, quantity, price )
-    VALUES ( $order_id, ".$row['item_id'].",".$_SESSION['cart'][$row['item_id']]['quantity'].",".$_SESSION['cart'][$row['item_id']]['price'].")" ;
-    $result = mysqli_query($link,$query);
+  { 
+    $item_id = $row['id']; // Retrieve the item_id from the product table
+    $quantity = $_SESSION['cart'][$item_id]['quantity'];
+    $price = $row['price']; // Retrieve the price from the product table
+
+    $query = "INSERT INTO order_content (order_id, item_id, quantity, price)
+              VALUES ($order_id, $item_id, $quantity, $price)";
+    
+    $result = mysqli_query($link, $query);
+    #=======================================================================
+    #$query = "INSERT INTO order_content ( order_id, item_id, quantity, price )
+    #VALUES ( $order_id, ".$row['id'].",".$_SESSION['cart'][$row['id']]['quantity'].",".[$row['id']]['price'].")" ;
+    #$result = mysqli_query($link,$query);
   }
   
   # Close database connection.
