@@ -3,20 +3,6 @@
 // Start or resume the session
 session_start();
 
-/*if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])){
-  // debugging
-  echo "User ID: " . $_SESSION['user_id'];
-  
-} */
-
-/*if (isset($_SESSION['cart']) && !empty($_SESSION['cart'])){
-  // debugging
-  // Display the contents of the session cart array
-  echo '<pre>';
-  print_r($_SESSION['cart']);
-  echo '</pre>';
-} */
-
 // Retrieve the total from the query parameter
 if (isset($_GET['total'])) {
   $cartTotal = floatval($_GET['total']);
@@ -52,7 +38,7 @@ if ( isset( $_GET['total'] ) && ( $_GET['total'] > 0 ) && (!empty($_SESSION['car
         #echo "Id: " . $id . "<br>";
         if ($firstIteration) {
             $q .= $id;
-            echo "q(2): " . $q . "<br>";
+            #echo "q(2): " . $q . "<br>";
             $firstIteration = false;
         } else {
             $q .= ',' . $id;
@@ -63,7 +49,7 @@ if ( isset( $_GET['total'] ) && ( $_GET['total'] > 0 ) && (!empty($_SESSION['car
   // Add the closing bracket
   $q .= ")";
   // Now $q should have the closing bracket
-  echo "q(4): " . $q . "<br>";
+  #echo "q(4): " . $q . "<br>";
   $r = mysqli_query ($link, $q);
   
   # Store order contents in 'order_content' database table.
@@ -87,7 +73,15 @@ if ( isset( $_GET['total'] ) && ( $_GET['total'] > 0 ) && (!empty($_SESSION['car
   mysqli_close($link);
 
   # Display order number.
-  echo "Thanks for your order. Your Order Number Is # ".$order_id."</p> ";
+  echo "<p>Thanks for your order. Your Order Number Is # ".$order_id."</p> ";
+  /*$message = "Thanks for your order. Your Order Number Is # ".$order_id." ";
+  if (isset($message)) { ?>
+    <script>
+        // Use PHP to generate JavaScript code for displaying a pop-up alert
+        var message = "<?php echo $message; ?>";
+        alert(message);
+    </script>
+ <?php } */
 
   # Remove cart items.  
   $_SESSION['cart'] = NULL ;

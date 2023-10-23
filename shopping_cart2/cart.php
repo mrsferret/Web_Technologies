@@ -17,14 +17,14 @@ if (empty($_SESSION['cart'])) {
     $cartMessage = '';
     // debugging
     // Display the contents of the session cart array
-    echo '<pre>';
-    print_r($_SESSION['cart']);
-    echo '</pre>';
+    #echo '<pre>';
+    #print_r($_SESSION['cart']);
+    #echo '</pre>';
 }
 #-------------------------------
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])){
     // debugging
-    echo "User ID: " . $_SESSION['user_id'] ."<br>";
+    #echo "User ID: " . $_SESSION['user_id'] ."<br>";
     
   }
 ?> 
@@ -50,12 +50,12 @@ if (isset($_POST['update_cart'])){
     echo '</pre>'; */
 
     if (isset($_SESSION['cart'])) {
-        echo "SESSION(cart) is set <br>";
+        #echo "SESSION(cart) is set <br>";
         
         // Loop through the post data to update the quantities for every product in the cart
         foreach ($_POST as $key => $value) {
-            echo "in foreach loop<br>";
-            echo "Key: $key, Value: ";
+            #echo "in foreach loop<br>";
+            #echo "Key: $key, Value: ";
             
             if (is_array($value)) {
                 echo "Array<br>";
@@ -76,7 +76,7 @@ if (isset($_POST['update_cart'])){
                     }
                 }
             } else {
-                echo $value . "<br>";
+                #echo $value . "<br>";
             }
         }
     }
