@@ -24,10 +24,90 @@ if (empty($_SESSION['cart'])) {
 #-------------------------------
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])){
     // debugging
-    echo "User ID: " . $_SESSION['user_id'];
+    echo "User ID: " . $_SESSION['user_id'] ."<br>";
     
   }
-  
+?> 
+
+<?php
+if (isset($_POST['update_cart'])){
+    echo "update_cart<br>";
+    echo '<pre>';
+    print_r($_SESSION['cart']);
+    echo '</pre>';
+    echo "<br>";
+
+    echo "$SESSION values<br>";
+    echo '<pre>';
+    print_r($_SESSION['cart']);
+    echo '</pre>';
+    echo "<br>";
+    echo '<pre>';
+
+    echo "$_POST values<br>";
+    echo '<pre>';
+    print_r($_POST);
+    echo '</pre>';
+
+    if (isset($_SESSION['cart'])){
+        echo "SESSION(cart) is set <br>";
+        // Loop through the post data to update the quantities for every product in the cart
+        foreach ($_POST as $key => $value) {
+            echo "in foreach loop<br>";
+            echo "Key: $key, Value: $value<br>";
+            //echo "$value: " . $value . "<br>";
+            if (strpos($key, 'qty') !== false) {
+                echo "if (strpos($key, 'qty') !== false)<br>";
+                $id = str_replace('qty', '', $key);
+                echo "key: " . $key . "<br>";
+                echo "ID: " . $id . "<br>";
+                $quantity = (int) $value;
+                echo "quantity: " . $quantity . "<br>";
+                // Validate the quantity and ensure it's not negative
+                if ($quantity >= 0) {
+                    if ($quantity === 0) {
+                        // If the quantity is set to 0, remove the product from the cart
+                        unset($_SESSION['cart'][$id]);
+                    } else {
+                        // Update the quantity for the product
+                        $_SESSION['cart'][$id] = $quantity;
+                    }
+                }
+            
+            } else {
+                echo "else section <br>";
+            }
+        }
+    }
+
+}
+// handle the form submission and update the cart
+/*if (isset($_POST['update_cart']) && isset($_SESSION['cart'])) {
+    // Loop through the post data to update the quantities for every product in the cart
+    foreach ($_POST as $key => $value) {
+        if (strpos($key, 'quantity-') !== false) {
+            $id = str_replace('quantity-', '', $key);
+            $quantity = (int) $value;
+            // Validate the quantity and ensure it's not negative
+            if ($quantity >= 0) {
+                if ($quantity === 0) {
+                    // If the quantity is set to 0, remove the product from the cart
+                    unset($_SESSION['cart'][$id]);
+                } else {
+                    // Update the quantity for the product
+                    $_SESSION['cart'][$id] = $quantity;
+                }
+            }
+        }
+    }
+    // Redirect back to the cart page to reflect the updated quantities
+    // header('location: index.php?page=cart');
+    header('location: cart.php');
+    #exit;
+}*/
+?>
+
+<?php
 // Include the header
 include 'includes\header.php';
 ?>
@@ -56,7 +136,7 @@ include 'includes\header.php';
             <p><?php echo $cartMessage; ?></p>
         </div>
         <div class="col-12">
-            <form method="POST" action="update_cart.php">
+            <form action="cart.php" method="post">
                 <table class="table">
                     <thead>
                         <tr>
@@ -85,7 +165,7 @@ include 'includes\header.php';
                                     $cartTotal += $productTotal;
 
                                     echo '<tr>';
-                                    echo '<td>' . $product['name'] . '</td>';
+                                    echo '<td>' . $product['name'] . '</td>'; // Corrected this line
                                     echo '<td>&pound;' . $productPrice . '</td>';
                                     echo '<td><input type="number" name="qty[' . $productId . ']" value="' . $cartItem['quantity'] . '"></td>';
                                     echo '<td>&pound;' . $productTotal . '</td>';
@@ -98,7 +178,8 @@ include 'includes\header.php';
                 </table>
                 <div class="row justify-content-end">
                     <div class="col-4">
-                        <button type="submit" class="btn btn-primary" name="update_cart">Update Basket</button>
+                        <button type="submit" class="btn btn-primary" name="update_cart">Update Cart</button> 
+                        <!--<input type="button" value="Update Cart" id="updateCart"> -->
                     </div>
                     <div class="col-3">
                         <p>Total: &pound;<?php echo $cartTotal; ?></p>
@@ -121,7 +202,15 @@ include 'includes\header.php';
         </div>
     </div>
 </div>
-
+<script>
+// Event listener for the "Update" button to trigger a JavaScript function 
+// that submits the form
+//  document.getElementById('updateCart').addEventListener('click', function() {
+//    // Submit the form when the button is clicked
+//    console.log('Button clicked for cart update'); // debugging
+//    document.querySelector('form').submit();
+//  });
+</script>
 <?php
 // Include the footer
 include 'includes\footer.php';
@@ -129,5 +218,25 @@ include 'includes\footer.php';
 // Close the database connection
 mysqli_close($link);
 ?>
+
 </body>
+<?php
+/*
+echo '<pre>';
+print_r($_POST);
+echo '</pre>';
+if (isset($_POST['update_cart'])) {
+    echo "update_cart";
+    foreach($_POST['quantity'] as $key => $val) {
+        if($val==0) {
+            unset($_SESSION['cart'][$key]);
+        }else{
+            $_SESSION['cart'][$key]['quantity']=$val;
+        }
+    }
+}
+*/
+?> 
+
+
 </html>
