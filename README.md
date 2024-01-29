@@ -21,6 +21,8 @@ Learning the basics of coding using PHP:
 
 [Challenge 1 code](/Challenge_1)
 
+[Challenge 2 code](Challenge_2)
+
 
 ## Stage 2
 
@@ -28,6 +30,15 @@ Using the skills learned in Stage 1, start to incrementally build the componenet
 
 - use PHP forms to collect data
 - create php scripts to perform CRUD operations on a database
+  
+  [Create php script](Challenge_3_CRUD_rework/create.php/)
+
+  [Read php script](Challenge_3_CRUD_rework/read.php/)
+
+  [Update php script](Challenge_3_CRUD_rework/update.php/)
+  
+  [Delete php script](Challenge_3_CRUD_rework/delete.php/)
+  
 - implement error handling
 - use cookies and sessions to save user information
 - create an html/php Create Account form to accept and verify user information and store it in a database
