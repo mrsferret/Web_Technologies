@@ -20,6 +20,7 @@ Learning the basics of coding using PHP:
 - PHP Superglobals
 
 [Challenge 1 code](/Challenge_1)
+[Challenge 2 code](Challenge_2)
 
 
 ## Stage 2
