@@ -18,15 +18,7 @@ if (!$conn) {
 if (isset($_GET['item_id'])) {
     //$id = $_GET['id'];
     $item_id = $_GET['item_id']; // Assign the value to $item_id
-     // Debugging: Output the value of 'id'
-     //echo "ID from URL: " . $id;
-     //echo "ID from URL: " . $item_id;
-
-    # Debugging - Loop through the $_POST array and print each key-value pair
-    #foreach ($_POST as $key => $value) {
-    #   echo "$key: $value<br>";
-    #}
-
+     
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // Handle form submission to update user data
         $item_name = $_POST['item_name'];
