@@ -12,12 +12,15 @@ This was taught in 3 stages with associated challenges.
 Learning the basics of coding using PHP:
 
 - Variables and Data Types
-- Strings, numbers and maths (https://github.com/mrsferret/Web_Technologies/tree/main/Challenge_1)
+- Strings, numbers and maths 
 - Arrays
 - Functions
 - Decision Making
 - Loops
 - PHP Superglobals
+
+[Challenge 1}(/Challenge_1)
+
 
 ## Stage 2
 
