@@ -1,4 +1,4 @@
-<php
+<?php
  $summer= "July-Aug";
  $winter= "Jan-Feb";
  $temperature = array("summer_low" =>11, "summer_high" =>19, "winter_low" =>1, "winter_high" =>7);
@@ -21,9 +21,8 @@ echo "<table  class=\"table table-condensed\">
  </tr>
 
  <tr>
-  <th>"$winter/th>
+  <th>$winter</th>
   <th>" . $temperature['winter_high'] . " ℃</th>
-  <th>"" . $temperature['winter_low'] . " ℃</th>
+  <th>" . $temperature['winter_low'] . " ℃</th>
  </tr>
 </table>";
-?>	
